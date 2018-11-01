@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<h1>Список выданных в настоящий момент Вам книг:</h1>
+
+{% if bookinstance_list %}
+
+<ul>
+	{% for bookinst in bookinstance_list %}
+	<li class="{% if bookinst.is_overdue %}text-danger{% endif %}">
+	<a href="{% url 'book-detail' bookinst.book.pk %}">{{ bookinst.book.title }}</a> (Автор -- {{ bookinst.book.author }}) [Срок сдачи: {{ bookinst.due_back }}] 
+	</li>
+	{% endfor %}
+</ul>
+{% else %}
+<p>Не найдено ни одной книги.
+
+{% endif %}
+
+{% endblock %}

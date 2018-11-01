@@ -19,12 +19,19 @@
 				{% block sidebar %}
 
 				<ul class="sidebar-nav">
+
 					{% if user.is_authenticated %}
-					<li>>{{ user.get_username }}</li>
+
+					<li>{{ user.get_username }}</li>
+					<li><a href="{% url 'mybooks' %}">Мои книги</a></li>
 					<li><a href="{% url 'logout' %}">Выход</a></li>
+
 					{% else %}
+
 					<li><a href="{% url 'login'%}">Вход</a></li>
+
 					{% endif %}
+
 				</ul>
 				<ul class="sidebar-nav">
 					<li><a href="{% url 'index' %}">На главную</a></li>
