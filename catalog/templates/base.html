@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 
-	{% block title %}<title>Library</title>{% endblock %}
+	{% block title %}<title>Библиотека</title>{% endblock %}
 
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,9 +19,17 @@
 				{% block sidebar %}
 
 				<ul class="sidebar-nav">
-					<li><a href="{% url 'index' %}">Home</a></li>
-					<li><a href="">All books</a></li>
-					<li><a href="">All authors</a></li>
+					{% if user.is_authenticated %}
+					<li>>{{ user.get_username }}</li>
+					<li><a href="{% url 'logout' %}">Выход</a></li>
+					{% else %}
+					<li><a href="{% url 'login'%}">Вход</a></li>
+					{% endif %}
+				</ul>
+				<ul class="sidebar-nav">
+					<li><a href="{% url 'index' %}">На главную</a></li>
+					<li><a href="">Все книги</a></li>
+					<li><a href="">Все авторы</a></li>
 				</ul>
 
 				{% endblock %}
@@ -31,7 +39,7 @@
 
 				{% block content %}
 				{%  endblock %}
-				
+
 			</div>			
 		</div>
 	</div>
