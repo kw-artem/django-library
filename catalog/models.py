@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 import uuid
 
 class Genre(models.Model):
