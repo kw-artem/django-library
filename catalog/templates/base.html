@@ -35,8 +35,14 @@
 				</ul>
 				<ul class="sidebar-nav">
 					<li><a href="{% url 'index' %}">На главную</a></li>
-					<li><a href="">Все книги</a></li>
-					<li><a href="">Все авторы</a></li>
+					<li><a href="{% url 'books' %}">Все книги</a></li>
+					<li><a href="{% url 'authors' %}">Все авторы</a></li>
+				</ul>
+
+				<ul class="sidebar-nav">
+					<li><a href="{% url 'new-author' %}">Добавить автора</a></li>
+					<li><a href="">----</a></li>
+					<li><a href="">----</a></li>
 				</ul>
 
 				{% endblock %}

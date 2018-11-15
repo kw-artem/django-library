@@ -14,7 +14,7 @@
 		<li><strong><a href="{% url 'books' %}">Именований книг:</a></strong> {{ num_books }}</li>
 		<li><strong>Всего экземпляров:</strong> {{ num_instances }}</li>
 		<li><strong>Доступных экземпляров:</strong> {{ num_instances_available }}</li>
-		<li><strong>Авторов:</strong> {{ num_authors }}</li>
+		<li><strong><a href="{% url 'authors' %}">Авторов:</a></strong> {{ num_authors }}</li>
 	</ul>
 
 <p> Эта страница была посещена {{ num_visits }} раз(а).

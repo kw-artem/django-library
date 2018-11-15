@@ -1,9 +1,12 @@
 from django.shortcuts import render
 import django.contrib.sessions
-from .models import Book, Author, BookInstance, Genre
+
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
+
+from .models import Book, Author, BookInstance, Genre
+from .forms  import AddNewAuthorForm
 
 def index(request):
 	
@@ -21,21 +24,11 @@ def index(request):
 		context={'num_books':num_books, 'num_instances':num_instances, 'num_instances_available':num_instances_available, 'num_authors':num_authors, 'num_visits':num_visits},
 	)
 
+class AuthorListView(ListView):
+	model = Author
 
-"""
-def book_detail_view(request,pk):
-	try:
-		book_id=Book.objects.get(pk=pk)
-	except Book.DoesNotExist:
-		raise Http404("Book does not exist")
-
-	#book_id=get_object_or_404(Book, pk=pk)
-	
-	return render(
-		request,
-		'catalog/book_detail.html',
-		context={'book':book_id,}
-"""
+class AuthorDetailView(DetailView):
+	model = Author
 
 class BookListView(ListView):
 	model = Book
@@ -50,3 +43,29 @@ class LoanedBooksByUserListView(LoginRequiredMixin, ListView):
 	
 	def get_queryset(self):
 		return BookInstance.objects.filter(borrower=self.request.user).filter(status__exact='o').order_by('due_back')
+
+def add_new_author(request):
+
+	form = AddNewAuthorForm(request.POST)
+
+	if form.is_valid():
+		form.save()
+
+	return render(
+		request,
+		'catalog/add_new_author.html',
+		context={'form': form},
+	)
+
+def add_new_book(request):
+
+	form = AddNewBookForm(request.POST)
+
+	if form.is_valid():
+		form.save()
+
+	return render(
+		request,
+		'catalog/add_new_book.html',
+		context={'form': form},
+	)	
