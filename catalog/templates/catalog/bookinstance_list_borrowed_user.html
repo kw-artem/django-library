@@ -10,7 +10,7 @@
 <ul>
 	{% for bookinst in bookinstance_list %}
 	<li class="{% if bookinst.is_overdue %}text-danger{% endif %}">
-	<a href="{% url 'book-detail' bookinst.book.pk %}">{{ bookinst.book.title }}</a> (Автор -- {{ bookinst.book.author }}) [Срок сдачи: {{ bookinst.due_back }}] 
+	<a href="{% url 'book-detail' bookinst.book.pk %}">{{ bookinst.book.title }}</a> (Автор -- {{ bookinst.book.authors }}) [Срок сдачи: {{ bookinst.due_back }}] 
 	</li>
 	{% endfor %}
 </ul>

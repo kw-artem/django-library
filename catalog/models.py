@@ -30,14 +30,18 @@ class Author(models.Model):
     def get_absolute_url(self):
         return reverse('author-detail', args=[str(self.id)])
 
+    def __str__(self):
+        return "%s %s" % (self. first_name, self.last_name)
+
 
 class Book(models.Model):
 
     title = models.CharField(max_length=200)
-    author = models.ForeignKey('Author', on_delete=models.SET_NULL, null=True)
+    authors = models.ManyToManyField(Author, null=True, blank=True, related_name='books')
     summary = models.TextField(max_length=1000)
     isbn = models.CharField('ISBN', max_length=13)
-    genre = models.ManyToManyField(Genre)
+    genres = models.ManyToManyField(Genre, null=True, blank=True, related_name='books')
+    lang = models.ManyToManyField(Language, null=True, blank=True, related_name='books')
     
     def __str__(self):
         return self.title

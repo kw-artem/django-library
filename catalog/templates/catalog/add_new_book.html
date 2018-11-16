@@ -1,14 +1,14 @@
 {% extends "base.html" %}
-{% block title %}<title>Новый автор</title>{% endblock %}
+{% block title %}<title>Новая книга</title>{% endblock %}
 
 {% block content %}
 
+<h1>Добавление новой книги:</h1>
 <form action="" method="POST">
     {% csrf_token %}
     {{ form.as_p }}
 
-
-    <input type="submit" value="Отправить">
+    <input type="submit" value="Добавить">
 </form>
 
 {% endblock %}

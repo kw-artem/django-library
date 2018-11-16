@@ -1,13 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
-	<h1>Название: {{ book.title }}</h1>
+	<h1>Информация о книге</h1>
+	<h2>{{ book.title }}</h2>
 
-	<p><strong>Автор:</strong> <a href="">{{ book.author }}</a>
-	<p><strong>Описание:</strong> {{ book.summary }}
-	<p><strong>ISBN:</strong> {{ book.isbn }} 
-	<p><strong>Язык:</strong> {{ book.language }}  
-	<p><strong>Жанр:</strong> {% for genre in book.genre.all %} {{ genre }} {% if not forloop.last %}, {% endif %}{% endfor %}  
+	<p><strong>Автор:</strong> 
+			{% for author in book.authors.all %}<a href="{{ author.get_absolute_url }}">{{ author }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}
+		</p>
+	<p><strong>Описание:</strong> <p>{{ book.summary }}</p></p>
+	<p><strong>ISBN:</strong> {{ book.isbn }}</p> 
+	<p><strong>Язык:</strong> {{ book.language }}</p>  
+	<p><strong>Жанр:</strong> {% for genre in book.genres.all %} {{ genre }}{% if not forloop.last %}, {% endif %}{% endfor %}  </p>
 
 	<div style="margin-left:20px;margin-top:20px">
 		<h4>Копии:</h4>

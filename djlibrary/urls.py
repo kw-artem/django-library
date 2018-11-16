@@ -17,6 +17,15 @@ from django.conf.urls import url, include
 from django.urls import path
 from django.contrib import admin
 
+from rest_framework import routers
+from .views import UserViewSet, GroupViewSet
+# from notebook.views import NoteViewSet
+
+router = routers.DefaultRouter()
+router.register(r'users', UserViewSet)
+router.register(r'groups', GroupViewSet)
+# router.register(r'notes', NoteViewSet)
+
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
@@ -33,6 +42,14 @@ urlpatterns += [
 	path('accounts/', include('django.contrib.auth.urls')),
 ]
 
+urlpatterns += [
+    url(r'^', include(router.urls)),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+]
+
+urlpatterns += [
+    path('', include('notebook.urls'))
+]
 """
 from django.views.generic import RedirectView
 
